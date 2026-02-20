@@ -13,7 +13,7 @@ PROJECT_ROOT=$(pwd)
 # -----------------------------
 if [ ! -d "bev" ]; then
     echo "Creating virtual environment..."
-    python -m venv bev
+    python3 -m venv bev
 fi
 
 # -----------------------------
