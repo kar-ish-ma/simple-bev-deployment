@@ -1,0 +1,19 @@
+# Virtual environment
+bev/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Model outputs
+outputs/
+
+# Large model files
+*.onnx
+*.pth
+*.onnx.data
+
+# OS files
+.DS_Store
+Thumbs.db

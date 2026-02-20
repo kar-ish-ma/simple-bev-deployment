@@ -1,0 +1,7 @@
+model:
+  input_size: 256
+  num_classes: 1
+paths:
+  int8: outputs/bev_model_int8.onnx
+  onnx: outputs/bev_model.onnx
+  weights: outputs/bev_model.pth
