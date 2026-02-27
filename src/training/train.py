@@ -2,14 +2,19 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import os
+import sys
+
+PROJECT_ROOT = os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+)
+sys.path.insert(0, PROJECT_ROOT)
 
 from src.models.model import SimpleBEV
 from src.utils.bev_utils import generate_dummy_bev
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-# Ensure outputs folder exists
-os.makedirs("../outputs", exist_ok=True)
+os.makedirs(os.path.join(PROJECT_ROOT, "outputs"), exist_ok=True)
 
 model = SimpleBEV().to(device)
 criterion = nn.BCEWithLogitsLoss()
@@ -30,5 +35,6 @@ for epoch in range(5):
 
     print(f"Epoch {epoch+1}, Loss: {loss.item():.4f}")
 
-torch.save(model.state_dict(), "../outputs/bev_model.pth")
-print("Model saved at outputs/bev_model.pth")
+weights_path = os.path.join(PROJECT_ROOT, "outputs", "bev_model.pth")
+torch.save(model.state_dict(), weights_path)
+print(f"Model saved at {weights_path}")
