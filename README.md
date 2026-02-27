@@ -255,9 +255,6 @@ bash run.sh
 
 ---
 
-## Resume-Ready Project Summary
-
-Designed and implemented a modular BEV deep learning pipeline featuring automated training, ONNX export, INT8 quantization, and benchmarking. Optimized for edge deployment and RISC-V environments using ONNX Runtime and structured Python packaging.
 
 ---
 
