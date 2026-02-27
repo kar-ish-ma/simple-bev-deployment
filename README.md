@@ -52,6 +52,62 @@ simple-bev-deployment/
 - Clean Git-compatible structure
 
 ---
+## Numerical Accuracy Comparison
+
+PyTorch output is used as the reference baseline.
+
+| Format      | MSE vs PyTorch | RMSE vs PyTorch |
+|-------------|---------------|----------------|
+| ONNX FP32   | 0.0000000000  | 0.0000000000   |
+| ONNX INT8   | 0.0006409131  | 0.0253162608   |
+
+### Interpretation
+
+- ONNX FP32 preserves numerical behavior exactly.
+- INT8 quantization introduces minimal numerical deviation.
+- Export fidelity is verified.
+
+---
+
+## Inference Speed Benchmark
+
+Average inference time measured over 200 runs.
+
+| Format        | Avg Inference Time (sec) | Speedup vs PyTorch |
+|---------------|--------------------------|--------------------|
+| PyTorch FP32  | 0.010416                 | 1.00×              |
+| ONNX FP32     | 0.002129                 | 4.89×              |
+| ONNX INT8     | 0.024161                 | 0.43×              |
+
+### Interpretation
+
+- ONNX FP32 achieves ~4.9× faster inference than native PyTorch.
+- INT8 model is slower in this case due to small model size and limited quantized layers.
+- ONNX Runtime provides significant execution optimization.
+
+---
+
+##  Model Size Comparison
+
+| Format        | Model Size (MB) |
+|---------------|------------------|
+| PyTorch FP32  | 0.10 MB          |
+| ONNX FP32     | 0.02 MB          |
+| ONNX INT8     | 0.03 MB          |
+
+### Interpretation
+
+- ONNX reduces storage footprint by ~80%.
+- INT8 reduces precision but does not significantly improve size due to small architecture.
+
+---
+
+##  Key Takeaways
+
+- ONNX export maintains numerical fidelity (MSE ≈ 0).
+- ONNX Runtime provides substantial speedup (≈4.9×).
+- Post-training dynamic quantization introduces minimal error.
+- For lightweight CNN models, INT8 may not always yield speed gains.
 
 ## System Requirements
 
@@ -255,6 +311,9 @@ bash run.sh
 
 ---
 
+## Resume-Ready Project Summary
+
+Designed and implemented a modular BEV deep learning pipeline featuring automated training, ONNX export, INT8 quantization, and benchmarking. Optimized for edge deployment and RISC-V environments using ONNX Runtime and structured Python packaging.
 
 ---
 
